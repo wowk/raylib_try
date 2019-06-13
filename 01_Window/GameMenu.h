@@ -74,7 +74,7 @@ public:
         Rectangle menuItemRect;
         menuItemRect.x = 30 + m_rect.x;
         menuItemRect.y = m_rect.y + 30 + (textSize.y +30) * (m_menuItems.size());
-        menuItemRect.width = textSize.x + 2;
+        menuItemRect.width = textSize.x*2;
         menuItemRect.height = textSize.y;
 
         auto menuItem = new GameMenuItem(this, text, menuItemRect);

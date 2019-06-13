@@ -26,7 +26,6 @@ void GameMenuItem::draw() {
 
 void GameMenuItem::drawSelected() {
     Font ff = m_menu->m_font;
-    ff.baseSize += 5;
     DrawTextRecEx(m_menu->m_font, m_text, m_rect, m_menu->m_fontSize,
                   m_menu->m_fontSpace, true, m_menu->m_menuItemColor,
                   0, ::strlen(m_text), m_menu->m_selectedMenuItemColor, GRAY);

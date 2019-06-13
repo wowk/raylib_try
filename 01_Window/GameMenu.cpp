@@ -19,7 +19,7 @@ int GameMenu::selectByPoint(Vector2 mousePos)
 void GameMenu::draw() {
     int count = 0;
 
-    DrawRectangleRounded(m_rect, 0.1, 1, GREEN);
+    DrawRectangleRounded(m_rect, 0.1, 1, Color{12,23,45,100});
 
     for(auto & menuItem : m_menuItems){
         if(count == menuSelected()){

@@ -6,7 +6,9 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
     GameMenuItem.cpp \
-    GameMenu.cpp
+    GameMenu.cpp \
+    GameBlock.cpp \
+    GamePanel.cpp
 
 INCLUDEPATH += -I /home/wowk/Code/raylib-2.5.0/build/src
 LIBS +=  -L /home/wowk/Code/raylib-2.5.0/build/src -lGL -lraylib -ldl -lpthread -lm -lX11
@@ -14,4 +16,6 @@ LIBS +=  -L /home/wowk/Code/raylib-2.5.0/build/src -lGL -lraylib -ldl -lpthread 
 HEADERS += \
     cube.h \
     GameMenuItem.h \
-    GameMenu.h
+    GameMenu.h \
+    GameBlock.hpp \
+    GamePanel.hpp
