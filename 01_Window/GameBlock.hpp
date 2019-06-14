@@ -5,14 +5,14 @@
 
 class GameBlock {
 public:
-    GameBlock(int x, int y, size_t size);
+    GameBlock(size_t size);
     void init(int type, int dir);
     void move(int x, int y);
     void draw(void);
     void nextType(void);
     void nextDir(void);
-
-    int d(int x, int y) const {return m_d[x][y];}
+    void setPos(int x, int y);
+    int d(int x, int y) const;
     int x() const {return m_x;}
     int y() const {return m_y;}
 

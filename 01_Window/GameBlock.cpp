@@ -76,28 +76,28 @@ const int blk_type[GameBlock::TYPE_MAX][4][16] = {
         /***************DIR_LEFT***************/
         {
             3, 3, 0, 0,
-            0, 3, 0, 0,
             0, 3, 3, 0,
+            0, 0, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_DOWN***************/
         {
-            0, 0, 3, 0,
-            3, 3, 3, 0,
+            0, 3, 0, 0,
+            3, 3, 0, 0,
             3, 0, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_RIGHT***************/
         {
             3, 3, 0, 0,
-            0, 3, 0, 0,
             0, 3, 3, 0,
+            0, 0, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_UP***************/
         {
-            0, 0, 3, 0,
-            3, 3, 3, 0,
+            0, 3, 0, 0,
+            3, 3, 0, 0,
             3, 0, 0, 0,
             0, 0, 0, 0,
         },
@@ -108,29 +108,29 @@ const int blk_type[GameBlock::TYPE_MAX][4][16] = {
         /***************DIR_LEFT***************/
         {
             4, 0, 0, 0,
-            4, 4, 4, 0,
-            0, 0, 4, 0,
+            4, 4, 0, 0,
+            0, 4, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_DOWN***************/
         {
             0, 4, 4, 0,
-            0, 4, 0, 0,
             4, 4, 0, 0,
+            0, 0, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_RIGHT***************/
         {
             4, 0, 0, 0,
-            4, 4, 4, 0,
-            0, 0, 4, 0,
+            4, 4, 0, 0,
+            0, 4, 0, 0,
             0, 0, 0, 0,
         },
         /***************DIR_UP***************/
         {
             0, 4, 4, 0,
-            0, 4, 0, 0,
             4, 4, 0, 0,
+            0, 0, 0, 0,
             0, 0, 0, 0,
         },
     },
@@ -273,11 +273,11 @@ Color color(int v) {
     return blk_color[v];
 }
 
-GameBlock::GameBlock(int x, int y, size_t size)
+GameBlock::GameBlock(size_t size)
 {
-   m_x = x;
-   m_y = y;
-   m_size = size;
+    m_x = 0;
+    m_y = 0;
+    m_size = size;
 }
 
 void GameBlock::init(int type, int dir)
@@ -285,14 +285,20 @@ void GameBlock::init(int type, int dir)
     assert(dir < GameBlock::DIR_MAX && dir >= 0);
     assert(type < GameBlock::TYPE_MAX && type >= 0);
 
-    m_dir  = m_dir;
+    m_dir  = dir;
     m_type = type;
+}
+
+int GameBlock::d(int x, int y) const
+{
+    const int* d = blk_type[m_type][m_dir];
+    return d[x*4+y];
 }
 
 void GameBlock::move(int x, int y)
 {
-    m_x += x * m_size;
-    m_y += y * m_size;
+    m_x += x;
+    m_y += y;
 }
 
 void GameBlock::draw()
@@ -302,10 +308,10 @@ void GameBlock::draw()
 
     rect.height = rect.width = m_size;
     for(unsigned i = 0 ; i < 4 ; i ++){
-        rect.x = m_x + i * m_size;
+        rect.x = (m_x + i) * m_size;
         for(unsigned j = 0 ; j < 4 ; j ++){
             if(d[i*4+j]){
-                rect.y = m_y + j * m_size;
+                rect.y = (m_y + j) * m_size;
                 DrawRectangleRounded(rect, 0.3, 1, color(d[i*4+j]));
             }
         }
@@ -324,4 +330,10 @@ void GameBlock::nextDir()
     if((++m_dir) == GameBlock::DIR_MAX){
         m_dir = 0;
     }
+}
+
+void GameBlock::setPos(int x, int y)
+{
+    m_x = x;
+    m_y = y;
 }

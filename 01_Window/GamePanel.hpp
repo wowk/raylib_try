@@ -12,6 +12,8 @@ public:
     void add(const GameBlock*);
     bool collision(const GameBlock*);
     bool full(void);
+    int wsize() {return m_wsize;}
+    int hsize() {return m_hsize;}
 
 private:
     int* m_panel;
